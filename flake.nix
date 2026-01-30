@@ -33,8 +33,12 @@
       ref = "v0.53.3";
     };
     nix-colors.url = "github:misterio77/nix-colors";
+    nixos-grub-themes = {
+      url = "github:jonasfranke/nixos-grub-themes";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, zen-browser, hyprland, home-manager, nix-colors, ...}@inputs: {
+  outputs = { self, nixpkgs, nixpkgs-unstable, zen-browser, hyprland, home-manager, nix-colors, nixos-grub-themes, ...}@inputs: {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         system = "x86_64-linux";

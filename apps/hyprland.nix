@@ -18,6 +18,7 @@
         "$browser"
         "hyprpaper & waybar & hypridle & hyprsunset -t 5200"
         "systemctl --user start hyprpolkitagent"
+        "hyprnotify"
       ];
 
       env = [ "XCURSOR_SIZE,12" "HYPRCURSOR_SIZE,12" "NIXOS_OZONE_WL,1" ];
