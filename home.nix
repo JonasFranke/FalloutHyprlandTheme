@@ -1,6 +1,19 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
+let
+  folder = ./apps;
+  
+  files = builtins.readDir folder;
+  
+  validFiles = lib.filterAttrs 
+    (name: type: 
+      (type == "regular" || type == "symlink") && 
+      (lib.hasSuffix ".nix" name) && 
+      (name != "default.nix")
+    ) 
+    files;
 
-{
+  importsList = map (name: folder + "/${name}") (builtins.attrNames validFiles);
+in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "jonas";
@@ -18,14 +31,7 @@
 
   home.sessionVariables = { };
 
-  imports = [
-    ./apps/hyprland.nix
-    ./apps/ghostty.nix
-    ./apps/waybar/waybar.nix
-    ./apps/zsh.nix
-    ./apps/rofi.nix
-    ./apps/btop.nix
-  ];
+  imports = importsList;
 
   colorScheme = import ./theme.nix;
 
