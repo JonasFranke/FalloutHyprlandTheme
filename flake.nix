@@ -34,7 +34,7 @@
     };
     nix-colors.url = "github:misterio77/nix-colors";
     nixos-grub-themes = {
-      url = "github:jonasfranke/nixos-grub-themes";
+      url = "github:jeslie0/nixos-grub-themes";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
